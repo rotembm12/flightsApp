@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Flights app</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous" />
+    <style>
+        body {
+            min-height: 100vh;
+            height: 100%;
+            background-image: url("./background.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            box-shadow: inset 0 0 3000px 100000px rgba(255, 255, 255, 0.6);
+        }
+
+        .container-fluid {
+            height: 100%;
+        }
+
+        .btn {
+            width: 50%;
+        }
+
+        .inList {
+            background-color: yellow;
+        }
+
+        .btn-danger {
+            width: 100%;
+        }
+		.map-preview-link {
+		    color: rgb(38, 115, 155);
+        }
+		.map-preview-link:hover {
+		    cursor: pointer;
+            color: rgb(0, 63, 193);
+            text-shadow: 1px 22px 4px 0.4px rgba(0,0,0,0.5);
+        }
+		.frame-preview {
+background-image: linear-gradient(to right top, #f8fdff, #ecf8fd, #e0f3fc, #d5eefc, #cae8fb);
+		}
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid p-5">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col-2 d-flex mb-2">
+                <label class="h3" for="fromDest">From: </label>
+            </div>
+            <div class="col-4 mb-2">
+                <select class="form-control"
+                        type="text"
+                        id="fromDest"
+                        value=""
+                        placeholder="From Destination"></select>
+            </div>
+
+            <div class="col-1 mb-2 d-flex">
+                <label class="h3" for="toDest">To: </label>
+            </div>
+            <div class="col-5 mb-2">
+                <select class="form-control"
+                        type="text"
+                        id="toDest"
+                        value=""
+                        placeholder="To Destination"></select>
+            </div>
+
+
+            <div class="col-2 d-flex">
+                <label class="h3" for="flightDateFrom">Departure </label>
+            </div>
+            <div class="col-4">
+                <input class="form-control"
+                       type="date"
+                       name=""
+                       id="flightDateFrom" />
+            </div>
+            <div class="col-1 d-flex">
+                <label class="h3" for="flightDateTo">Arrive </label>
+            </div>
+            <div class="col-5">
+                <input class="form-control"
+                       type="date"
+                       name=""
+                       id="flightDateTo" />
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row justify-content-center">
+            <div class="col-8 text-center justify-content-center d-flex align-items-center mb-1 ">
+                <button class="btn btn-light text-dark"
+                        onclick="onBtnClick()">
+                    Search Flights
+                    <img src="./search.png" alt="search icon" />
+                </button>
+            </div>
+            <div class="col-8 justify-content-center text-center mb-2">
+                <button id="showMyFlights" class="btn btn-secondary">
+                    Show My Flights
+                    <img src="./airplane.png" alt="airplane icon" />
+                </button>
+            </div>
+            <div class="col-5">
+                <input type="text"
+                       id="routesFilter"
+                       placeholder="Filter by city name"
+                       class="form-control" />
+            </div>
+        </div>
+
+        <div id="flightsList" class="row justify-content-center"></div>
+
+        <div class="col-12" id="alertWrap"></div>
+        
+        
+    </div>
+    <script src="./main.js"></script>
+    <script src="./index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+</html>
