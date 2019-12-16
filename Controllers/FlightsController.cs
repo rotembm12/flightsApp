@@ -28,18 +28,9 @@ namespace flightsApp.Controllers
 		[Route("api/flights/stop/{city}")]
 		public List<Flights> Get(string city)
 		{
-			List<Flights> flightList = Flights.flightsList.Where(flight =>
-					{
-						foreach (var route in flight.Routes)
-						{
-							if (route.ContainsValue(city))
-							{
-								return true;
-							}
-						}
-						return false;
-					}).ToList();
-			return flightList;
+            List<Flights> flightList = Flights.getFlights();
+            return flightList.Where(flight => flight.Routes.ToUpper().Contains(city.ToUpper())).ToList();
+		
 		}
 
 		// POST: api/flights

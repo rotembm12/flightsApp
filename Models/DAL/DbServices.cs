@@ -130,25 +130,27 @@ namespace flightsApi.Models.DAL
                     flight.Arrival = (string)dr[1];
                     flight.Departure = (string)dr[2];
                     flight.Price = Int32.Parse((string)dr[3]);
+                    if(dr[6] != null)
+                        flight.Routes = (string)dr[6];
 
                     var airport1 = new Airports();
-                    airport1.Id = ((int)dr[6]).ToString();
-                    airport1.AirportName = (string)dr[7];
-                    airport1.AirportCity = (string)dr[8];
-                    airport1.AirportCountry = (string)dr[9];
-                    airport1.AirportLat = (string)dr[10];
-                    airport1.AirportLong = (string)dr[11];
-                    airport1.AirportCode = (string)dr[12];
+                    airport1.Id = ((int)dr[7]).ToString();
+                    airport1.AirportName = (string)dr[8];
+                    airport1.AirportCity = (string)dr[9];
+                    airport1.AirportCountry = (string)dr[10];
+                    airport1.AirportLat = (string)dr[11];
+                    airport1.AirportLong = (string)dr[12];
+                    airport1.AirportCode = (string)dr[13];
                     flight.FromAirport = airport1;
 
                     var airport2 = new Airports();
-                    airport2.Id = ((int)dr[13]).ToString();
-                    airport2.AirportName = (string)dr[14];
-                    airport2.AirportCity = (string)dr[15];
-                    airport2.AirportCountry = (string)dr[16];
-                    airport2.AirportLat = (string)dr[17];
-                    airport2.AirportLong = (string)dr[18];
-                    airport2.AirportCode = (string)dr[19];
+                    airport2.Id = ((int)dr[14]).ToString();
+                    airport2.AirportName = (string)dr[15];
+                    airport2.AirportCity = (string)dr[16];
+                    airport2.AirportCountry = (string)dr[17];
+                    airport2.AirportLat = (string)dr[18];
+                    airport2.AirportLong = (string)dr[19];
+                    airport2.AirportCode = (string)dr[20];
                     flight.ToAirport = airport2;
 
                     
@@ -253,8 +255,8 @@ namespace flightsApi.Models.DAL
 
         private string BuildInsertCmd(Flights flight)
         {
-            string prefix = "INSERT INTO Flights_2020 (Arrival, Departure, Price, FromAirportId, ToAirportId) ";
-            string cmdValues = string.Format("VALUES ('{0}','{1}','{2}',{3},{4})", flight.Arrival, flight.Departure, flight.Price, flight.FromAirport.Id, flight.ToAirport.Id);
+            string prefix = "INSERT INTO Flights_2020 (Arrival, Departure, Price, FromAirportId, ToAirportId, Routes) ";
+            string cmdValues = string.Format("VALUES ('{0}','{1}','{2}',{3},{4},'{5}')", flight.Arrival, flight.Departure, flight.Price, flight.FromAirport.Id, flight.ToAirport.Id, flight.Routes);
             return prefix + cmdValues;
         }
 

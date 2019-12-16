@@ -14,7 +14,7 @@ namespace flightsApi.Models
 		int price;
 		Airports fromAirport;
 		Airports toAirport;
-		List<Dictionary<string, string>> routes;
+		string routes;
 
 		public static List<Flights> flightsList = new List<Flights>();
 
@@ -24,7 +24,7 @@ namespace flightsApi.Models
 		public int Price { get => price; set => price = value; }
 		public Airports FromAirport { get => fromAirport; set => fromAirport = value; }
 		public Airports ToAirport { get => toAirport; set => toAirport = value; }
-		public List<Dictionary<string, string>> Routes { get => routes; set => routes = value; }
+		public string Routes { get => routes; set => routes = value; }
 
 		public static List<Flights> Insert(Flights flight)
 		{

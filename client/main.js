@@ -119,6 +119,7 @@ async function onBtnClick() {
             });
 
             const res = await response.json();
+
             if (!res.data) {
                 return alert("no flights to show");
             }
@@ -238,6 +239,10 @@ async function addFlight(event) {
             flight => flight.Id == card.flightData.id
         );
         if (exists.length === 0) {
+            const rawFlightData = card.flightData;
+            const routes = rawFlightData.routes.map((route) => `from:${route.cityFrom} to:${route.cityTo}`);
+            card.flightData.routes = routes.join();
+            console.log(card.flightData);
             const response = await fetch("../api/flights", {
                 method: "POST",
                 headers: {
@@ -260,48 +265,38 @@ async function addFlight(event) {
 
 async function getMyFlights() {
     try {
-        const response = await fetch('../api/Flights');
-        const myFlights = await response.json();
-        if (myFlights.length > 0) {
-            app.myFlights = myFlights
-            console.log("%cApp.myFlights has been updated", "color: Green; font-size: 16px");
-            console.log(app);
+        const routesFilter = document.getElementById("routesFilter").value;
+
+        if (routesFilter !== "") {
+            const response = await fetch(`../api/flights/stop/${routesFilter}`);
+            const myFlights = await response.json();
+            if (myFlights.length > 0) {
+                app.myFlights = myFlights
+                console.log("%cApp.myFlights has been updated with filtered flights", "color: violet; font-size: 16px");
+                console.log(app);
+            }
+        } else {
+            const response = await fetch('../api/Flights');
+            const myFlights = await response.json();
+            if (myFlights.length > 0) {
+                app.myFlights = myFlights
+                console.log("%cApp.myFlights has been updated", "color: Green; font-size: 16px");
+                console.log(app);
+            }
         }
     } catch (err) {
         console.error(err);
     }
-    //try {
-    //    const routesFilter = document.getElementById("routesFilter").value;
-
-    //    if (routesFilter === "") {
-    //        const response = await fetch("../api/flights", {
-    //            method: "GET"
-    //        });
-    //        myFlights = await response.json();
-    //        console.log(myFlights);
-    //    } else {
-    //        const response = await fetch(
-    //            `../api/flights/stop/${routesFilter}`,
-    //            {
-    //                method: "GET"
-    //            }
-    //        );
-    //        myFlights = await response.json();
-    //        console.log(myFlights);
-    //    }
-    //} catch (err) {
-    //    console.log(err);
-    //}
 }
 
 async function renderMyFlights() {
     await getMyFlights();
     document.getElementById("flightsList").innerHTML = "";
     console.log(app.myFlights);
-    if (app.routesFilter) {
-        console.log(app.routesFilter)
-        return null;
-    }
+    //if (app.routesFilter) {
+    //    console.log(app.routesFilter)
+    //    return null;
+    //}
     if (app.myFlights.length > 0) {
         app.myFlights.forEach((flight, index) => {
             //flight = { arr, dep, fromAp, toAp, price }
